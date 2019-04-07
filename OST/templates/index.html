@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block headblock %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet">
+{% endblock %}
+
+{% block fullscreen %}
+
+{% if user.is_authenticated %}
+     <h1> Logged in </h1>
+     <a href="{% url 'myapp:drive' %}"><button type="button" class="btn btn-primary">Start Driving</button></a>
+{% else %}
+    <h1> Please Log in </h1>
+{% endif %}
+
+{% endblock %}
