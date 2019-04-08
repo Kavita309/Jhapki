@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Jhapki2</title>
+    <title>Sleep Detection</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
@@ -28,20 +28,30 @@
             </a>
     					<ul class="nav navbar-nav navbar-right">
     						{% if user.is_authenticated %}
-                    <li><a href="{% url 'myapp:logout' %}"><button type="button" class="btn btn-primary">LogOut</button></a></li>
+                    <li><a href="{% url 'myapp:logout' %}"><button type="button" class="btn btn-success">LogOut</button></a></li>
     						{% else %}
-                      <li><a href="{% url 'myapp:login' %}"><button type="button" class="btn btn-primary">Login</button></a></li>
+                      <li><a href="{% url 'myapp:login' %}"><button type="button" class="btn btn-success">Login</button></a></li>
                       <li><p></p></li>
 
-                      <li><a href="{% url 'myapp:signup' %}"><button type="button" class="btn btn-primary">Sign Up</button></a></li>
+                      <li><a href="{% url 'myapp:signup' %}"><button type="button" class="btn btn-success">Sign Up</button></a></li>
                       <li><p></p></li>
     						{% endif %}
-
+<br><br>
     					</ul>
     			</div>
     		</nav>
+
+        <style media="screen">
+          .container_3{
+            background-color: #aef957;
+          }
+        </style>
+
+
         {% block fullscreen %}
+        
         {% endblock %}
+
         <div class="container mycontent">
           {% block content %}
 
@@ -51,5 +61,5 @@
   <canvas id="canvas"></canvas>
 
   </body>
-  <!-- <script src="{% static "simplesocial/js/master.js"%}" type="text/javascript" ></script> -->
+
 </html>

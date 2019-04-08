@@ -1,17 +1,225 @@
+
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block headblock %}
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet"> -->
 {% endblock %}
 
 {% block fullscreen %}
 
-{% if user.is_authenticated %}
-     <h1> Logged in </h1>
-     <a href="{% url 'myapp:drive' %}"><button type="button" class="btn btn-primary">Start Driving</button></a>
-{% else %}
-    <h1> Please Log in </h1>
-{% endif %}
+<br>
+<br><br><br><br><br><br><br><br><br><br>
+<h1 class="heading">SECURE YOURSELF</h1>
+
+<div class="container_1">
+
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+</div>
+
+  {% if user.is_authenticated %}
+
+       <a href="{% url 'myapp:drive' %}"><button type="button" class="btn btn-danger my_button">Start Driving</button></a>
+       <a href=" "><button type="button" class="btn btn-danger my_button_2">Stop Driving</button></a>
+
+  {% else %}
+  <br><br><br><br><br>
+      <h1 class=text> Please Log In/Sign Up to continue! </h1>
+  {% endif %}
+
+<style media="screen">
+  .heading {
+    color: white;
+    font-size: 80px;
+    font-family: 'Special Elite', cursive;
+
+    text-align: center;
+  }
+
+  .text{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Ubuntu Condensed', sans-serif;
+  }
+  .my_button{
+
+    margin-left: 25%;
+    margin-top : 5%;
+    font-size: 30px;
+
+
+  }
+  .my_button_2{
+
+    margin-left: 25%;
+    margin-top : 5%;
+    font-size: 30px;
+
+  }
+  .container_1 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: 10s rotate-container infinite ease-in-out alternate;
+}
+
+.box {
+  position: absolute;
+  border: 1px solid #ea1d02;
+  width: 200px;
+  height: 200px;
+  animation: 10s rotate-square ease-in infinite alternate;
+}
+.box:nth-child(1) {
+  --current: 9deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+.box:nth-child(2) {
+  --current: 18deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+.box:nth-child(3) {
+  --current: 27deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+.box:nth-child(4) {
+  --current: 36deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+.box:nth-child(5) {
+  --current: 45deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+.box:nth-child(6) {
+  --current: 54deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+.box:nth-child(7) {
+  --current: 63deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+.box:nth-child(8) {
+  --current: 72deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+.box:nth-child(9) {
+  --current: 81deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+.box:nth-child(10) {
+  --current: 90deg;
+  transform: rotate(var(--current));
+}
+@keyframes rotate-square {
+  0%, 20% {
+    transform: none;
+  }
+  70% {
+    transform: rotate(var(--current));
+  }
+}
+@keyframes rotate-container {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(720deg);
+  }
+}
+body {
+  position: relative;
+  height: 100vh;
+  background-color: black;
+}
+
+</style>
 
 {% endblock %}

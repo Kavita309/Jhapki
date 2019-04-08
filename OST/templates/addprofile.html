@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Jhapki2</title>
+    <title>Sleep Detection</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
@@ -29,9 +29,9 @@
             </a>
     					<ul class="nav navbar-nav navbar-right">
     						{% if user.is_authenticated %}
-                    <li><a href="{% url 'myapp:logout' %}"><button type="button" class="btn btn-primary">LogOut</button></a></li>
+                    <li><a href="{% url 'myapp:logout' %}"><button type="button" class="btn btn-success">LogOut</button></a></li>
     						{% else %}
-                      <li><a href="{% url 'myapp:signup' %}"><button type="button" class="btn btn-primary">Sign Up</button></a></li>
+                      <li><a href="{% url 'myapp:signup' %}"><button type="button" class="btn btn-success">Sign Up</button></a></li>
                       <li><p></p></li>
     						{% endif %}
 
@@ -40,20 +40,26 @@
     		</nav>
         {% block fullscreen %}
         {% endblock %}
-        <div class="container mycontent">
+        <div class="container mycontent container_3">
           {% block content %}
-          <h1>PLEASE FILL IN YOUR DETAILS!</h1>
-          <div class="container">
-              <h1>Add your profile here!</h1>
+
+          <div class="container container_3">
+            <h1 >PLEASE COMPLETE YOUR PROFILE!</h1>
+
               <form method="POST" class="form">
                   {% csrf_token %}
                   {% bootstrap_form form %}
-                  <input type="submit" value="Become a member" class="btn btn-default">
+                  <input type="submit" value="Become a member" class="btn btn-danger">
+                  <br><br><br>
               </form>
           </div>
           {% endblock %}
         </div>
-
+        <style media="screen">
+          .container_3{
+            background-color: #aef957;
+          }
+        </style>
   <canvas id="canvas"></canvas>
 
   </body>
