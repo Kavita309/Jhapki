@@ -28,8 +28,10 @@
             </a>
     					<ul class="nav navbar-nav navbar-right">
     						{% if user.is_authenticated %}
-                    <li><a href="{% url 'myapp:logout' %}"><button type="button" class="btn btn-success">LogOut</button></a></li>
-    						{% else %}
+                      <li><a href="{% url 'myapp:mypro' %}"><button type="button" class="btn btn-success">My Profile</button></a></li>
+                      <li><a href="{% url 'myapp:logout' %}"><button type="button" class="btn btn-success">LogOut</button></a></li>
+                    
+              	{% else %}
                       <li><a href="{% url 'myapp:login' %}"><button type="button" class="btn btn-success">Login</button></a></li>
                       <li><p></p></li>
 
@@ -49,7 +51,7 @@
 
 
         {% block fullscreen %}
-        
+
         {% endblock %}
 
         <div class="container mycontent">

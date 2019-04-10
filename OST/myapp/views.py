@@ -17,6 +17,19 @@ import time
 import dlib
 import cv2
 import pygame
+from geopy.geocoders import Nominatim
+import geocoder
+
+def loc():
+	g = geocoder.ip('me')
+	print(g.latlng)
+	geolocator = Nominatim(user_agent="Drowsiness Detection")
+	loca=str(g.latlng[0])+","+str(g.latlng[1])
+	# location = geolocator.reverse(loca)
+	location = geolocator.reverse("28.6082819, 77.0350079")
+	print(location.address)
+	print((location.latitude, location.longitude))
+	return location
 
 
 def eye_aspect_ratio(eye):
@@ -41,14 +54,21 @@ class SignUp(CreateView):
     success_url = reverse_lazy("myapp:addprofile")
     template_name = "signup.html"
 
+
+class MyProfile(TemplateView):
+    template_name = 'myprofile.html'
+
 def SendSMS():
 	account_sid = 'ACbbc0add8b0c9821500ebef3164b07884'
 	auth_token = 'b7497199ab5af1e2c2783759f4ea279a'
 	client = Client(account_sid, auth_token)
-
+	loc()
 	message = client.messages.create(
 	                              from_='+15077246172',
-	                              body='Ho gaya Mansi!',
+	                              body='Drowsiness Detected! Mansi needs your help uregntly. Her Location: NSIT, Azad Hind Fauj Marg, Nawada, Sector 3, Dwarka, West Delhi, Delhi, 110078, India (28.6082819, 77.0350079)',
+								  # body='Drowsiness Detected! {User} needs your help uregntly.
+								  # Her Location: {location}
+								  # (location.latitude,location.longitude)',
 	                              to='+918860243261'
 	                          )
 	print(message.sid)
@@ -142,9 +162,10 @@ def StartDrive(request):
 					pygame.mixer.music.load("static/file.mp3")
 					pygame.mixer.music.play()
 
-					if SETS > 4:
+					if SETS >= 4:
 						SendSMS()
 						SETS = 0
+						print("msg sent")
 
     		# otherwise, the eye aspect ratio is not below the blink
     		# threshold
