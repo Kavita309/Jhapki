@@ -37,3 +37,5 @@ class Profile(models.Model):
     RefName5=models.CharField('Emergency Contact Name-5',max_length=264)
     RefContactNo5=PhoneNumberField('Emergency Contact Number-5',null=False, blank=False, unique=True)
     Accuracy=models.IntegerField(default=0)
+    no_of_trips=models.IntegerField(default=0)
+    no_of_sleeps=models.IntegerField(default=0)

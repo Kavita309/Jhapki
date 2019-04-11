@@ -5,6 +5,7 @@ from django.urls import reverse_lazy,reverse
 from django.views.generic import CreateView,TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . import forms
+from . import models
 from scipy.spatial import distance as dist
 from imutils.video import FileVideoStream
 from imutils.video import VideoStream
@@ -55,8 +56,16 @@ class SignUp(CreateView):
     template_name = "signup.html"
 
 
-class MyProfile(TemplateView):
-    template_name = 'myprofile.html'
+def get_info(request):
+	profile=models.Profile.objects.filter(id=1)
+	sleeps=profile[0].no_of_sleeps
+	trips=profile[0].no_of_trips
+	name = profile[0].Name
+	if trips == 0:
+		accr = 0
+	else:
+		accr = (trips - sleeps)/trips * 100
+	return render(request, 'myprofile.html', {'name':name, 'accr' : accr, 'sleeps' : sleeps, 'trips' :trips})
 
 def SendSMS():
 	account_sid = 'ACbbc0add8b0c9821500ebef3164b07884'
@@ -80,6 +89,12 @@ def StartDrive(request):
 	pygame.mixer.quit()
 	pygame.mixer.init(22050, -16, 2, 64)
 
+	profile=models.Profile.objects.filter(id=1)
+	no_trips=profile[0].no_of_trips
+	no_sleeps=profile[0].no_of_sleeps
+	no_trips=no_trips+1
+	models.Profile.objects.filter(id=1).update(no_of_trips=no_trips)
+
 	EYE_AR_THRESH = 0.3
 	EYE_AR_CONSEC_FRAMES = 3
 	sleep_frames = 100
@@ -88,7 +103,7 @@ def StartDrive(request):
 	COUNTER = 0
 	TOTAL = 0
 	SETS = 0
-
+	CHECK = True
     # initialize dlib's face detector (HOG-based) and then create
     # the facial landmark predictor
 	print("[INFO] loading facial landmark predictor...")
@@ -155,22 +170,30 @@ def StartDrive(request):
     		# threshold, and if so, increment the blink frame counter
 			if ear < EYE_AR_THRESH:
 				COUNTER += 1
+
 				if COUNTER >= sleep_frames:
+
+					if CHECK:
+						no_sleeps = no_sleeps + 1
+						models.Profile.objects.filter(id=1).update(no_of_sleeps=no_sleeps)
+						CHECK = False
 					COUNTER=0
 					SETS += 1
 					print("DONT SLEEP")
 					pygame.mixer.music.load("static/file.mp3")
 					pygame.mixer.music.play()
-
 					if SETS >= 4:
 						SendSMS()
 						SETS = 0
 						print("msg sent")
 
+
     		# otherwise, the eye aspect ratio is not below the blink
     		# threshold
 			else:
+
 				pygame.mixer.music.stop()
+
     			# if the eyes were closed for a sufficient number of
     			# then increment the total number of blinks
 				if COUNTER >= EYE_AR_CONSEC_FRAMES:
@@ -196,7 +219,6 @@ def StartDrive(request):
     # do a bit of cleanup
 	cv2.destroyAllWindows()
 	vs.stop()
-
 	return render(request,'index.html')
 
 

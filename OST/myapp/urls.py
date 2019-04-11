@@ -11,6 +11,6 @@ urlpatterns = [
     url(r"^signup/$", views.SignUp.as_view(), name="signup"),
     url(r"^drive/$", views.StartDrive, name="drive"),
     url(r"^addprofile/$", views.add_profile.as_view(), name="addprofile"),
-    url(r"^mypro/$", views.MyProfile.as_view(), name="mypro"),
+    url(r"^mypro/$", views.get_info, name="mypro"),
 
 ]

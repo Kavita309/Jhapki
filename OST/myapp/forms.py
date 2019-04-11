@@ -16,4 +16,4 @@ class UserCreateForm(UserCreationForm):
 class AddProfileForm(forms.ModelForm):
     class Meta():
         model = Profile
-        exclude = ('Accuracy',)
+        exclude = ('Accuracy','no_of_trips','no_of_sleeps')
