@@ -32,6 +32,20 @@ def loc():
 	print((location.latitude, location.longitude))
 	return location
 
+def SendSMS():
+	account_sid = 'ACbbc0add8b0c9821500ebef3164b07884'
+	auth_token = 'b7497199ab5af1e2c2783759f4ea279a'
+	client = Client(account_sid, auth_token)
+	loc()
+	message = client.messages.create(
+	                              from_='+15077246172',
+	                              body='Drowsiness Detected! Mansi needs your help uregntly. Her Location: NSIT, Azad Hind Fauj Marg, Nawada, Sector 3, Dwarka, West Delhi, Delhi, 110078, India (28.6082819, 77.0350079)',
+								  # body='Drowsiness Detected! {User} needs your help uregntly.
+								  # Her Location: {location}
+								  # (location.latitude,location.longitude)',
+	                              to='+918860243261'
+	                          )
+	print(message.sid)
 
 def eye_aspect_ratio(eye):
 	# compute the euclidean distances between the two sets of
@@ -67,18 +81,25 @@ def get_info(request):
 		accr = (trips - sleeps)/trips * 100
 	return render(request, 'myprofile.html', {'name':name, 'accr' : accr, 'sleeps' : sleeps, 'trips' :trips})
 
-def SendSMS():
+def loc_1():
+	g = geocoder.ip('me')
+	print(g.latlng)
+	geolocator = Nominatim(user_agent="Drowsiness Detection")
+	loca=str(g.latlng[0])+","+str(g.latlng[1])
+	location = geolocator.reverse(loca)
+	print(location.address)
+	print((location.latitude, location.longitude))
+	return location
+
+def SendSMS_1():
 	account_sid = 'ACbbc0add8b0c9821500ebef3164b07884'
 	auth_token = 'b7497199ab5af1e2c2783759f4ea279a'
 	client = Client(account_sid, auth_token)
-	loc()
+	loc_1()
 	message = client.messages.create(
 	                              from_='+15077246172',
-	                              body='Drowsiness Detected! Mansi needs your help uregntly. Her Location: NSIT, Azad Hind Fauj Marg, Nawada, Sector 3, Dwarka, West Delhi, Delhi, 110078, India (28.6082819, 77.0350079)',
-								  # body='Drowsiness Detected! {User} needs your help uregntly.
-								  # Her Location: {location}
-								  # (location.latitude,location.longitude)',
-	                              to='+918860243261'
+	                              body='Drowsiness Detected! {User} needs your help urgently.Her Location: {location} (location.latitude,location.longitude)',
+	                              to={phone_no_1}
 	                          )
 	print(message.sid)
 

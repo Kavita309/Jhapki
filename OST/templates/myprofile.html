@@ -9,13 +9,23 @@
 
 {% block fullscreen %}
 
+<div class="container_3 jumbotron container">
+
+
 <h1>Hi {{ name }}</h1>
 <h2>Your skill analysis is as follows:</h2>
 <h2>No. of trips : {{ trips }}</h2>
 <h2>No. of trips in which you got drowsy : {{ sleeps }}</h2>
 
-<h1> Percentage of alert trips : {{ accr}} </h1>
+<h1> Percentage of alert trips : {{ accr }} </h1>
 
+</div>
+
+<style media="screen">
+  .container_3{
+    background-color: #aef957;
+  }
+</style>
 
 
 {% endblock %}
